@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráficas de Resultados</title>
+    <link rel="shortcut icon" href="../static/img/logo.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f6fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background: #1e3799;
+            color: white;
+            text-align: center;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem auto;
+            gap: 2rem;
+        }
+
+        .grafica {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .grafica:hover {
+            transform: scale(1.02);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            max-height: 700px;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 0.8rem;
+            font-weight: 500;
+        }
+
+        .boton-volver {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 0.8rem 2rem;
+            background: #1e3799;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .boton-volver:hover {
+            background: #4a69bd;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gráficas de Resultados</h1>
+    </header>
+
+    <div class="contenedor">
+        <div class="grafica">
+            <img src="/uploads/graficas/SOLO_conteo.png" alt="Gráfica SOLO">
+            <p>Distribución de categorías - SOLO</p>
+        </div>
+
+        <div class="grafica">
+            <img src="/uploads/graficas/BLOOM_conteo.png" alt="Gráfica BLOOM">
+            <p>Distribución de categorías - BLOOM</p>
+        </div>
+
+        <div class="grafica">
+            <img src="/uploads/graficas/TEMA_CLASIFICADO_conteo.png" alt="Gráfica TEMA CLASIFICADO">
+            <p>Distribución de categorías - TEMA CLASIFICADO</p>
+        </div>
+
+        <a href="/clasificacion" class="boton-volver">← Volver al inicio</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: linear-gradient(90deg, #ffffff, #ffffff);
+  color: rgb(10, 0, 70);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 2rem;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.header .logo {
+  position: absolute;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.header .logo img {
+  height: 60px;
+  width: auto;
+  border-radius: 10px;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.contenido {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.contenido h2 {
+  font-size: 1.6rem;
+  color: #000b70;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contenido p {
+  margin-bottom: 2rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+.upload-box {
+  border: 3px dashed #003158;
+  border-radius: 20px;
+  background-color: #fff8f8;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.upload-box:hover {
+  background-color: #ffecec;
+  transform: scale(1.02);
+  border-color: #000d49;
+}
+
+.upload-content .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.upload-content p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.upload-content small {
+  color: #777;
+}
+
+#fileInfo {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+#sendBtn {
+  margin-top: 2rem;
+  background: linear-gradient(90deg, #00013d, #050052);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 2.5rem;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+#sendBtn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(90deg, #004696, #000a9b);
+}
+#sendBtn:disabled {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+#btnGraficas {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#btnGraficas:disabled {
+    background-color: #ccc;
+}

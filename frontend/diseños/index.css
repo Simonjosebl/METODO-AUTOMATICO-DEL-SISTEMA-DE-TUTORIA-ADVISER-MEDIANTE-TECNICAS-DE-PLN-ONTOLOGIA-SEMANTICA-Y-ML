@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+}
+
+.container {
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.heartbeat {
+  max-width: 100vh;
+  max-height: 100vh;
+  object-fit: contain;
+  animation: latido 2s infinite ease-in-out;
+}
+
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.08);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  75% {
+    transform: scale(1.08);
+  }
+}
