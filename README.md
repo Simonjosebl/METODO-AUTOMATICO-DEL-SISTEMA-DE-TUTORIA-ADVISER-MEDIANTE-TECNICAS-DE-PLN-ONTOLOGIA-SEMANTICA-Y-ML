@@ -192,8 +192,8 @@ Este proyecto está bajo la licencia Creative Commons Attribution 4.0 Internatio
 
 👨‍💻 Autores
 Autor	Contacto
-Simón José Bravo Lozano	simonjbl@example.com
-Felipe Cuervo Lorenzana	fcuervol@example.com
+Simón José Bravo Lozano	
+Felipe Cuervo Lorenzana	
 Docente Tutor: MsC. Juan Carlos Barrero Calixto
 
 Universidad Católica de Colombia
