@@ -137,6 +137,16 @@ bash
 uvicorn api.app:app --reload
 Luego abre tu navegador en http://127.0.0.1:8000 y sube un archivo de tutorías.
 
+Panel de carga.
+
+<img width="758" height="364" alt="image" src="https://github.com/user-attachments/assets/aa787ebf-30de-4972-88c5-f729cb8c3f09" />
+
+Exportación Archivo con clasificación de + 3000 registros de tutorías del sistema ADVISER de la unviersidad Católica de Colombia, junto con panel de gráficos interactivos.
+
+<img width="762" height="290" alt="image" src="https://github.com/user-attachments/assets/c40fce45-0c68-484c-b8d1-7fede0e6b243" />
+
+
+
 📌 Limitaciones y Trabajos Futuros
 Limitaciones Actuales
 El análisis está restringido a las asignaturas del área de software de Ingeniería de Sistemas.
