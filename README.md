@@ -33,153 +33,48 @@ Este enfoque busca transformar datos textuales no estructurados en información 
 | Categoría | Tecnologías |
 | :--- | :--- |
 | **Lenguaje** | Python 3.8+ |
-| **Procesamiento de Texto (PLN)** | SpaCy, NLTK, Sentence-Transformers, Unicode (normalización) |
-| **Machine Learning / Embeddings** | Scikit-learn (Random Forest, Naive Bayes, métricas), SBERT (`paraphrase-multilingual-MiniLM-L12-v2`) |
+| **Procesamiento de Texto (PLN)** | SpaCy, NLTK, Sentence-Transformers, Unicode |
+| **Machine Learning / Embeddings** | Scikit-learn, SBERT (`paraphrase-multilingual-MiniLM-L12-v2`) |
 | **LLM (Comparativo)** | OpenAI GPT-4o Mini (vía API) |
 | **Manipulación de Datos** | Pandas, NumPy |
 | **Visualización** | Matplotlib, Seaborn |
-| **API y Despliegue (Prototipo)** | FastAPI, Uvicorn |
-| **Ontologías (Backend conceptual)** | Protégé |
-| **Entorno de Desarrollo** | Google Colab, Visual Studio Code |
+| **API y Despliegue** | FastAPI, Uvicorn |
+| **Ontologías** | Protégé |
+| **Entorno de Desarrollo** | Google Colab, VS Code |
 
 ## 🏗️ Arquitectura del Método Automático
 
 El sistema se compone de un **pipeline** de procesamiento de 4 etapas:
 
-1.  **Entrada de Datos**:
-    - Carga el dataset histórico del sistema ADVISER (archivo Excel/CSV con columnas: `ASIGNATURA`, `TEMA O CONCEPTO`).
+1.  **Entrada de Datos**: Carga el dataset histórico del sistema ADVISER.
+2.  **Procesamiento y Filtrado**: Filtra por programa (Ingeniería de Sistemas), área de software, y aplica limpieza, tokenización y lematización.
+3.  **Clasificación Semántica**: Usa diccionarios taxonómicos + embeddings (SentenceTransformer) + similitud coseno.
+4.  **Salida de Resultados**: Genera archivo Excel con columnas `BLOOM`, `SOLO`, `TEMA_CLASIFICADO`, `APRENDIZAJE_ASIGNATURA`.
 
-2.  **Procesamiento y Filtrado**:
-    - Filtra los registros del programa de **Ingeniería de Sistemas y Computación**.
-    - Selecciona solo las asignaturas del **área de software**.
-    - Limpieza de texto: eliminación de caracteres especiales, tokenización y **lematización** (con SpaCy).
-
-3.  **Clasificación Semántica (Método Principal)**:
-    - Utiliza **diccionarios taxonómicos** preconstruidos (Bloom, SOLO, Temas, RA).
-    - Aplica un **modelo de comparación semántica** mediante **embeddings** (SentenceTransformer) y **similitud coseno**.
-    - *(Opcional/Comparativo)*: También se probaron un modelo **híbrido (MMAS)** y un método basado en **LLM (GPT-4o Mini)**.
-
-4.  **Salida de Resultados**:
-    - Genera un archivo de Excel con las columnas originales más cuatro nuevas: `BLOOM`, `SOLO`, `TEMA_CLASIFICADO`, `APRENDIZAJE_ASIGNATURA`.
-
-## 📂 Estructura del Repositorio (Propuesta)
+## 📂 Estructura del Repositorio
 
 ```text
 /
 ├── data/                      # Datasets de ejemplo (anónimos)
 │   ├── tutorias_adviser.xlsx
 │   └── dataset_control_mejorado.xlsx
-├── diccionarios/              # Diccionarios taxonómicos en formato JSON o CSV
+├── diccionarios/              # Diccionarios taxonómicos (JSON/CSV)
 │   ├── bloom_taxonomia.json
 │   ├── solo_taxonomia.json
 │   ├── temas_programacion.json
 │   └── resultados_aprendizaje.json
-├── src/                       # Código fuente del método
-│   ├── preprocesamiento.py    # Limpieza, tokenización, lematización
-│   ├── clasificadores.py      # Lógica de similitud coseno y ML
-│   ├── main.py                # Pipeline principal
-│   └── utils.py               # Funciones auxiliares
-├── api/                       # Prototipo de API con FastAPI
+├── src/                       # Código fuente
+│   ├── preprocesamiento.py
+│   ├── clasificadores.py
+│   ├── main.py
+│   └── utils.py
+├── api/                       # Prototipo API con FastAPI
 │   ├── app.py
-│   └── templates/
-│       └── index.html         # Interfaz web simple
-├── notebooks/                 # Notebooks de experimentación
+│   └── templates/index.html
+├── notebooks/                 # Experimentación
 │   └── evaluacion_modelos.ipynb
-├── resultados/                # Ejemplos de archivos de salida
-│   └── tutorias_clasificadas.xlsx
-├── docs/                      # Documentación adicional
-│   └── Anexo_Diccionarios.pdf
-├── requirements.txt           # Dependencias del proyecto
-├── README.md                  # Este archivo
-└── LICENSE                    # Licencia Creative Commons BY 4.0
-📊 Métricas de Desempeño (Resultados Clave)
-El método fue evaluado con 3.794 registros reales y un dataset de control mejorado. El método Lingüístico (SBERT + similitud coseno) fue el de mejor rendimiento.
-
-Método Evaluado	Accuracy (Global)	Precisión (Macro)	Recall (Macro)	F1-Score (Macro)
-Método Lingüístico (Principal)	0.842	0.858	0.831	0.837
-Método MMAS (ML + Perceptrones)	0.651	0.639	0.672	0.608
-Método LLM-API (GPT-4o Mini)	0.071	0.043	0.040	0.022
-Método Lingüístico (Dataset Control con verbos explícitos)	0.978	0.897	0.897	0.897
-Hallazgos Principales:
-El método lingüístico supera significativamente a los enfoques de ML estándar y a LLMs genéricos sin ajuste fino.
-
-La calidad del texto (presencia de verbos, estructura gramatical) es el factor más determinante para una alta precisión.
-
-El método es consistente (F1 ~0.47-0.45) incluso cuando se compara con criterios de clasificación manual de diferentes docentes.
-
-El tiempo de procesamiento es de 6 a 8 minutos para clasificar más de 3,000 registros.
-
-🧪 Cómo Usar el Proyecto
-Prerrequisitos
-Python 3.8 o superior
-
-Pip (gestor de paquetes)
-
-Instalación
-Clona el repositorio:
-
-bash
-git clone https://github.com/tu-usuario/analisis-tutorias-adviser.git
-cd analisis-tutorias-adviser
-Instala las dependencias:
-
-bash
-pip install -r requirements.txt
-(Opcional) Descarga el modelo de lenguaje de SpaCy para español:
-
-bash
-python -m spacy download es_core_news_md
-Ejecución (Modo Línea de Comando)
-bash
-python src/main.py --input data/tutorias_adviser.xlsx --output resultados/clasificacion.xlsx
-Ejecución (Modo Web - Prototipo)
-bash
-uvicorn api.app:app --reload
-Luego abre tu navegador en http://127.0.0.1:8000 y sube un archivo de tutorías.
-
-Panel de carga.
-
-
-"<img width="758" height="364" alt="image" src="https://github.com/user-attachments/assets/aa787ebf-30de-4972-88c5-f729cb8c3f09" />"
-
-Exportación Archivo con clasificación de + 3000 registros de tutorías del sistema ADVISER de la unviersidad Católica de Colombia, junto con panel de gráficos interactivos.
-
-"<img width="762" height="290" alt="image" src="https://github.com/user-attachments/assets/c40fce45-0c68-484c-b8d1-7fede0e6b243" />"
-
-
-
-📌 Limitaciones y Trabajos Futuros
-Limitaciones Actuales
-El análisis está restringido a las asignaturas del área de software de Ingeniería de Sistemas.
-
-No se incluyen factores psicosociales o económicos de los estudiantes.
-
-El método depende de la calidad de redacción de los registros (sin verbos o telegráficos, el rendimiento baja).
-
-Trabajos Futuros Propuestos
-Soporte para múltiples formatos de archivo (CSV, JSON, bases de datos).
-
-Integración con paneles de control interactivos (Power BI, Tableau) para visualización de resultados.
-
-Implementación de medidas de seguridad y detección de archivos maliciosos.
-
-Extensión a todas las áreas del programa de Ingeniería de Sistemas y Computación.
-
-📄 Licencia
-Este proyecto está bajo la licencia Creative Commons Attribution 4.0 International (CC BY 4.0). Puede compartir y adaptar el material, siempre que se dé el crédito adecuado.
-
-👨‍💻 Autores e Institución
-Simón José Bravo Lozano (simonjbl@example.com)
-
-Felipe Cuervo Lorenzana (fcuervol@example.com)
-
-Docente Tutor: MsC. Juan Carlos Barrero Calixto
-
-Universidad Católica de Colombia
-Facultad de Ingeniería - Programa de Ingeniería de Sistemas y Computación
-Bogotá D.C., 2025-3
-
-📚 Referencia
-Si usas este trabajo en tu investigación, por favor cita como:
-
-Bravo Lozano, S. J., Cuervo Lorenzana, F. (2025). Método automático para el análisis de narrativas escritas del sistema de tutorías ADVISER mediante técnicas de procesamiento de lenguaje natural de texto, ontologías semánticas y Machine Learning. (Trabajo de grado). Universidad Católica de Colombia, Bogotá.
+├── resultados/                # Archivos de salida
+├── docs/images/               # Imágenes para el README
+├── requirements.txt
+├── README.md
+└── LICENSE
